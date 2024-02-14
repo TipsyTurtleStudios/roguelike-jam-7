@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkc6emhyk4hld"]
+
+[ext_resource type="Script" path="res://CharacterController/SideScroller/Scenes/collectable_blue_coin.gd" id="1_86ly1"]
+[ext_resource type="Texture2D" uid="uid://dbncb0mr1wwn" path="res://CharacterController/SideScroller/GFX/3 Objects/2 Decoration/small_blue_coin.png" id="2_2ipou"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xt1b3"]
+radius = 28.0
+
+[node name="Blue_Coin" type="StaticBody2D" groups=["collectable"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_86ly1")
+
+[node name="BlueCoin" type="Sprite2D" parent="."]
+texture = ExtResource("2_2ipou")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 1.2)
+shape = SubResource("CircleShape2D_xt1b3")

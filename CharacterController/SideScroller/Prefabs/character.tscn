@@ -1,0 +1,224 @@
+[gd_scene load_steps=17 format=3 uid="uid://v4iodnn8fvq"]
+
+[ext_resource type="Script" path="res://CharacterController/SideScroller/Scripts/Player/char_controller.gd" id="1_6jrqh"]
+[ext_resource type="Texture2D" uid="uid://bnrdqqwt6duti" path="res://CharacterController/SideScroller/GFX/Swordsman/Idle.png" id="2_xgn7b"]
+[ext_resource type="Texture2D" uid="uid://c1ifl8geq4el3" path="res://rawassets/Dragon.png" id="3_lmf1n"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2ah82"]
+radius = 8.0
+height = 40.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jjc3"]
+atlas = ExtResource("2_xgn7b")
+region = Rect2(40, 54, 52, 74)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2jhk"]
+atlas = ExtResource("2_xgn7b")
+region = Rect2(168, 54, 52, 74)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oxf0n"]
+atlas = ExtResource("2_xgn7b")
+region = Rect2(296, 54, 52, 74)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r32en"]
+atlas = ExtResource("2_xgn7b")
+region = Rect2(424, 54, 52, 74)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rd1as"]
+atlas = ExtResource("2_xgn7b")
+region = Rect2(552, 54, 52, 74)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dy5ye"]
+atlas = ExtResource("2_xgn7b")
+region = Rect2(680, 54, 52, 74)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqwl1"]
+atlas = ExtResource("2_xgn7b")
+region = Rect2(808, 54, 52, 74)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aa31q"]
+atlas = ExtResource("2_xgn7b")
+region = Rect2(936, 54, 52, 74)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mpujp"]
+animations = [{
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_1jjc3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2jhk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oxf0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r32en")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rd1as")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dy5ye")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqwl1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aa31q")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 8.0
+}]
+
+[sub_resource type="Animation" id="Animation_cfwok"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dragon:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_lmf1n")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dragon:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Dragon:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Dragon:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_chohg"]
+resource_name = "move"
+length = 0.23
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dragon:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_lmf1n")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dragon:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Dragon:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Dragon:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bb7hi"]
+_data = {
+"RESET": SubResource("Animation_cfwok"),
+"move": SubResource("Animation_chohg")
+}
+
+[node name="Character" type="CharacterBody2D"]
+collision_layer = 3
+script = ExtResource("1_6jrqh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_2ah82")
+
+[node name="animations" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-1, 0)
+sprite_frames = SubResource("SpriteFrames_mpujp")
+animation = &"Idle"
+frame_progress = 0.242898
+
+[node name="controller_container" type="Node" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_2ah82")
+
+[node name="Dragon" type="Sprite2D" parent="."]
+position = Vector2(0, -1.90735e-06)
+scale = Vector2(3.322, 3)
+texture = ExtResource("3_lmf1n")
+hframes = 4
+
+[node name="DragonFly" type="AnimationPlayer" parent="."]
+autoplay = "move"
+libraries = {
+"": SubResource("AnimationLibrary_bb7hi")
+}
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
