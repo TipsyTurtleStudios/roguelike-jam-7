@@ -117,7 +117,7 @@ func _ready():
 	wall_jump_node = get_node("wall_jump_time")
 	wall_jump_coyote_node = get_node("wall_jump_coyote_time")
 	stamina_penalty_node = get_node("stamina_zero_penalty_timer")
-	dust_burst = get_node("DustTrail/DustBurst")
+	#dust_burst = get_node("DustTrail/DustBurst")
 	
 	set_timers()
 	

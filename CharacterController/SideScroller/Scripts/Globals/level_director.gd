@@ -9,6 +9,9 @@ var yellow_coins : int = 0
 var _olddebugmessage : String = ""
 var _debugmessage : String = ""
 
+var LeaderBoard = "main"
+var DebugMode=false
+
 @export var level_countout_seconds : int = 2
 var level_countout : Timer
 var start_end_level : bool = false
@@ -19,16 +22,16 @@ var SFXManager : AudioStreamPlayer
 var MusicManager : AudioStreamPlayer
 var CameraDirector : CameraDirector
 
-const JUMP = preload("res://SFX/350905__cabled-mess__jump-c-05.wav")
-const COLLECTIBLE = preload("res://SFX/coin.wav")
-const DEATH = preload("res://SFX/Death.mp3")
-const HIT = preload("res://SFX/hitHurt.wav")
-const SCENECHANGE = preload("res://SFX/404750__owlstorm__retro-video-game-sfx-collect-5.wav")
-const BGM_1 = preload("res://SFX/My Song  (crap, timing is wrong do not use) 2.ogg")
-const BGM_GameOver = preload("res://SFX/Game_Over_BGM_-_30112023_12.58_pm.mp3")
-const BGM_Level = preload("res://SFX/Level.Title_BGM_-_30112023_12.44_pm.mp3")
-const BGM_SciFi = preload("res://SFX/Scifi_Lvl_BGM_-_30112023_1.37_pm.mp3")
-const BGM_Title = preload("res://SFX/Title_BGM_-_30112023_1.13_pm.mp3")
+#const JUMP = preload("res://SFX/350905__cabled-mess__jump-c-05.wav")
+#const COLLECTIBLE = preload("res://SFX/coin.wav")
+#const DEATH = preload("res://SFX/Death.mp3")
+#const HIT = preload("res://SFX/hitHurt.wav")
+#const SCENECHANGE = preload("res://SFX/404750__owlstorm__retro-video-game-sfx-collect-5.wav")
+#const BGM_1 = preload("res://SFX/My Song  (crap, timing is wrong do not use) 2.ogg")
+#const BGM_GameOver = preload("res://SFX/Game_Over_BGM_-_30112023_12.58_pm.mp3")
+#const BGM_Level = preload("res://SFX/Level.Title_BGM_-_30112023_12.44_pm.mp3")
+#const BGM_SciFi = preload("res://SFX/Scifi_Lvl_BGM_-_30112023_1.37_pm.mp3")
+#const BGM_Title = preload("res://SFX/Title_BGM_-_30112023_1.13_pm.mp3")
 
 func _ready():
 	var new_level_countout := Timer.new()
@@ -48,6 +51,20 @@ func _ready():
 	MusicPlayerNode.volume_db = -17.5
 	add_child(MusicPlayerNode)
 	MusicManager = get_node("Music")
+	
+	var cmdline = {}
+	for argument in OS.get_cmdline_args():
+		if argument.find("=") > -1:
+			var key_value = argument.split("=")
+			cmdline[key_value[0].lstrip("--")] = key_value[1]
+		else:
+			cmdline[argument.lstrip("--")] = ""
+	
+	if cmdline.has("debug"):
+		LeaderBoard="debug"
+		DebugMode=true
+		
+	print(cmdline)
 
 func ResetLevel():
 	start_end_level = false

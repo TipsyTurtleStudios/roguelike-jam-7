@@ -1,5 +1,6 @@
 extends Node
 const ScoreItem = preload("res://addons/silent_wolf/Scores/ScoreItem.tscn")
+
 var list_index = 0
 #UploadScore
 var UploadedScore : bool = false
@@ -21,7 +22,7 @@ var YellowCoinTarget : int
 var YellowCoinScore : int = 1
 
 # Tick Speed
-var TickSpeed : float=0.09
+var TickSpeed : float=0.05
 var delta_time : float
 var next_update : float
 
@@ -35,12 +36,13 @@ func _ready():
 	LevelDirector.PlayMusic(LevelDirector.BGM_GameOver)
 	SilentWolf.configure({
 		"api_key": "6NW2Oigo5P4Zb8GYCZBMl6jN2I3ug4pn3Ktr2FGk",
-		"game_id": "GameJam2023",
+		"game_id": "scalehome",
 		"log_level": 1
 	})
 	SilentWolf.configure_scores({
 		"open_scene_on_close": "res://Scenes/end_level.tscn"
 	})
+	
 	TimeTarget = LevelDirector.player_score
 	BlueCoinTarget = LevelDirector.blue_coins
 	YellowCoinTarget = LevelDirector.yellow_coins
@@ -49,7 +51,7 @@ func _ready():
 	
 	if TimeTarget > 20:
 		TimeInterval = TimeTarget / 30
-
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	delta_time += delta
@@ -60,17 +62,17 @@ func _process(delta):
 			if TimeCount >= TimeTarget:
 				TimeCount = TimeTarget
 				total_score = int(TimeTarget * 10)
-				next_update = delta_time + (10*TickSpeed)
+				next_update = delta_time + (2*TickSpeed)
 		else:
 			if YellowCoinCount < YellowCoinTarget:
-				next_update = delta_time + (10*TickSpeed)
+				next_update = delta_time + (2*TickSpeed)
 				YellowCoinCount += 1
 				total_score +=  YellowCoinScore
 				if YellowCoinCount >= YellowCoinTarget:
 					YellowCoinCount = YellowCoinTarget
 			else:
 				if BlueCoinCount < BlueCoinTarget:
-					next_update = delta_time + (10*TickSpeed)
+					next_update = delta_time + (2*TickSpeed)
 					BlueCoinCount += 1
 					total_score +=  BlueCoinScore
 					if BlueCoinCount >= BlueCoinTarget:
@@ -83,12 +85,12 @@ func _process(delta):
 	if not UploadedScore:
 		UploadedScore = true
 		#TODO: Calculate numeric score and player name
-		SilentWolf.Scores.save_score(LevelDirector.player_name, target_total_score)
+		await SilentWolf.Scores.save_score(LevelDirector.player_name, target_total_score, LevelDirector.LeaderBoard)
 
 	if UploadedScore and not LoadedLeaderBoard:
 		LoadedLeaderBoard = true
 		var scores = SilentWolf.Scores.scores
-		var sw_result = await SilentWolf.Scores.get_scores(3).sw_get_scores_complete
+		var sw_result = await SilentWolf.Scores.get_scores(3,LevelDirector.LeaderBoard).sw_get_scores_complete
 		scores = sw_result.scores
 		for score in scores:
 			add_item(score.player_name, str(int(score.score)))
