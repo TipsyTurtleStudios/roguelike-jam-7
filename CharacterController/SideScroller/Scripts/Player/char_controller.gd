@@ -186,7 +186,7 @@ func character_jump(increase_jump_count : int, early_release : bool = false) -> 
 	if early_release:
 		calc_jump_force *= jump_early_release
 	else:
-		LevelDirector.PlaySound(LevelDirector.JUMP)
+		#LevelDirector.PlaySound(LevelDirector.JUMP)
 		if cur_stamina < jump_stamina_cost:
 			calc_jump_force = calc_jump_force * low_stamina_penalty
 		stamina_penalty(jump_stamina_cost)
@@ -247,8 +247,10 @@ func get_character_input():
 	#Apply Accelerations
 	#Both Dodging and wall jumps are set character X speeds while they are in control
 
-	var tile_acceleration_modifier = get_tile_mod(1, 1, 0.3, true)
-	var speed_modifier = get_tile_mod(2, 1.0, 0.2, true)
+	var tile_acceleration_modifier = 1.0 
+	#get_tile_mod(1, 1, 0.3, true)
+	var speed_modifier = 1.0
+	#get_tile_mod(2, 1.0, 0.2, true)
 	
 	if dash_node.is_stopped() && wall_jump_node.is_stopped():
 		var adjust_rate = acceleration * tile_acceleration_modifier
