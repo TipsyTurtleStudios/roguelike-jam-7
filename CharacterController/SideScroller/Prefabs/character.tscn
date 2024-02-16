@@ -1,200 +1,151 @@
-[gd_scene load_steps=16 format=3 uid="uid://v4iodnn8fvq"]
+[gd_scene load_steps=22 format=3 uid="uid://v4iodnn8fvq"]
 
 [ext_resource type="Script" path="res://CharacterController/SideScroller/Scripts/Player/char_controller.gd" id="1_6jrqh"]
 [ext_resource type="Texture2D" uid="uid://bnrdqqwt6duti" path="res://CharacterController/SideScroller/GFX/Swordsman/Idle.png" id="2_xgn7b"]
+[ext_resource type="Texture2D" uid="uid://c2kv12ex5omyv" path="res://CharacterController/SideScroller/GFX/Swordsman/Walk.png" id="3_vvr8c"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2ah82"]
-radius = 8.0
-height = 40.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1jjc3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1sdsq"]
 atlas = ExtResource("2_xgn7b")
-region = Rect2(40, 54, 52, 74)
+region = Rect2(0, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_t2jhk"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5wpl"]
 atlas = ExtResource("2_xgn7b")
-region = Rect2(168, 54, 52, 74)
+region = Rect2(128, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_oxf0n"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mu468"]
 atlas = ExtResource("2_xgn7b")
-region = Rect2(296, 54, 52, 74)
+region = Rect2(256, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_r32en"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kih70"]
 atlas = ExtResource("2_xgn7b")
-region = Rect2(424, 54, 52, 74)
+region = Rect2(384, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rd1as"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bjjs"]
 atlas = ExtResource("2_xgn7b")
-region = Rect2(552, 54, 52, 74)
+region = Rect2(512, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dy5ye"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1dwy"]
 atlas = ExtResource("2_xgn7b")
-region = Rect2(680, 54, 52, 74)
+region = Rect2(640, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qqwl1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_vacex"]
 atlas = ExtResource("2_xgn7b")
-region = Rect2(808, 54, 52, 74)
+region = Rect2(768, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_aa31q"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfdks"]
 atlas = ExtResource("2_xgn7b")
-region = Rect2(936, 54, 52, 74)
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qi24"]
+atlas = ExtResource("3_vvr8c")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1xtt"]
+atlas = ExtResource("3_vvr8c")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06oei"]
+atlas = ExtResource("3_vvr8c")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xargr"]
+atlas = ExtResource("3_vvr8c")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_blb8i"]
+atlas = ExtResource("3_vvr8c")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddrh6"]
+atlas = ExtResource("3_vvr8c")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vlr67"]
+atlas = ExtResource("3_vvr8c")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w11ke"]
+atlas = ExtResource("3_vvr8c")
+region = Rect2(896, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mpujp"]
 animations = [{
 "frames": [{
-"duration": 6.0,
-"texture": SubResource("AtlasTexture_1jjc3")
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1sdsq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_t2jhk")
+"texture": SubResource("AtlasTexture_r5wpl")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_oxf0n")
+"texture": SubResource("AtlasTexture_mu468")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_r32en")
+"texture": SubResource("AtlasTexture_kih70")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rd1as")
+"texture": SubResource("AtlasTexture_1bjjs")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dy5ye")
+"texture": SubResource("AtlasTexture_v1dwy")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qqwl1")
+"texture": SubResource("AtlasTexture_vacex")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_aa31q")
+"texture": SubResource("AtlasTexture_cfdks")
 }],
 "loop": true,
 "name": &"Idle",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6qi24")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1xtt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06oei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xargr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_blb8i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ddrh6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vlr67")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w11ke")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
 }]
 
-[sub_resource type="Animation" id="Animation_cfwok"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Dragon:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Dragon:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Dragon:vframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Dragon:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_chohg"]
-resource_name = "move"
-length = 0.23
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Dragon:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Dragon:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Dragon:vframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Dragon:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.15, 0.2, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 3]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bb7hi"]
-_data = {
-"RESET": SubResource("Animation_cfwok"),
-"move": SubResource("Animation_chohg")
-}
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2ah82"]
+radius = 12.0
+height = 72.0
 
 [node name="Character" type="CharacterBody2D"]
 collision_layer = 3
 script = ExtResource("1_6jrqh")
 
+[node name="animations" type="AnimatedSprite2D" parent="."]
+position = Vector2(2.08165e-12, -27)
+sprite_frames = SubResource("SpriteFrames_mpujp")
+animation = &"Walk"
+autoplay = "Idle"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_2ah82")
-
-[node name="animations" type="AnimatedSprite2D" parent="."]
-position = Vector2(-1, 0)
-sprite_frames = SubResource("SpriteFrames_mpujp")
-animation = &"Idle"
-frame_progress = 0.242898
 
 [node name="controller_container" type="Node" parent="."]
 
@@ -205,16 +156,5 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_2ah82")
-
-[node name="Dragon" type="Sprite2D" parent="."]
-position = Vector2(-7, -13)
-scale = Vector2(0.40625, 0.544922)
-hframes = 4
-
-[node name="DragonFly" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_bb7hi")
-}
-autoplay = "move"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
