@@ -23,12 +23,6 @@ extends CharacterBody2D
 @export var apex_float_modifier = 0.4
 @export var apex_threshold = 100
 
-@export_subgroup("Wall Jump")
-@export var max_wall_slide_velocity = 100
-@export var wall_jump_time = 0.2
-@export var wall_jump_x_speed = 700
-@export var wall_jump_reverse_coyote_time = 0.1
-
 # Internal Variables
 ## Presets
 var is_left = false
@@ -41,8 +35,6 @@ var jump_allowance_node : Timer
 var coyote_node : Timer
 var dash_node : Timer
 var controller_node : Node
-var wall_jump_node : Timer
-var wall_jump_coyote_node : Timer
 var dust_burst : GPUParticles2D
 
 var wall_jump_ready = false
@@ -83,22 +75,12 @@ func _ready():
 	new_dash_timer.name = "dash_time"
 	add_child(new_dash_timer)
 	
-	var new_wall_jump_timer := Timer.new()
-	new_wall_jump_timer.name = "wall_jump_time"
-	add_child(new_wall_jump_timer)
-	
-	var new_wall_jump_coyote_timer := Timer.new()
-	new_wall_jump_coyote_timer.connect("timeout", wall_jump_coyote_trigger)
-	new_wall_jump_coyote_timer.name = "wall_jump_coyote_time"
-	add_child(new_wall_jump_coyote_timer)
 	
 	animation_node = get_node("animations")#get_node("animations")
 	jump_allowance_node = get_node("jump_allowance")
 	coyote_node = get_node("coyote_allowance")
 	dash_node = get_node("dash_time")
 	controller_node = get_node("controller_container")
-	wall_jump_node = get_node("wall_jump_time")
-	wall_jump_coyote_node = get_node("wall_jump_coyote_time")
 	#dust_burst = get_node("DustTrail/DustBurst")
 	
 	set_timers()
@@ -116,10 +98,6 @@ func set_timers():
 	coyote_node.one_shot = true
 	dash_node.wait_time = dash_time
 	dash_node.one_shot = true
-	wall_jump_node.wait_time = wall_jump_time
-	wall_jump_node.one_shot = true
-	wall_jump_coyote_node.wait_time = wall_jump_reverse_coyote_time
-	wall_jump_coyote_node.one_shot = true
 
 func set_controller(input_controller: player_controller) -> void:
 	#Remove Previous Controllers
@@ -190,17 +168,6 @@ func get_character_input():
 		if not coyote_node.is_stopped():
 			character_velocity.y = character_jump(1)
 			coyote_node.stop()
-		elif is_on_wall() && not is_on_floor() && wall_jump_ready:
-			character_velocity.y = character_jump(0)
-			var wall_jump_velocity = wall_jump_x_speed
-			if not is_left:
-				wall_jump_velocity = wall_jump_velocity * -1
-			character_velocity.x = wall_jump_velocity
-			wall_jump_node.start()
-			wall_jump_ready = false
-		elif not is_on_floor() && cur_jump_count < (max_jumps_enabled - 1):
-			character_velocity.y = character_jump(1)
-			wall_jump_node.stop()
 		else:
 			jump_allowance_node.start()
 		
@@ -227,7 +194,7 @@ func get_character_input():
 	var speed_modifier = 1.0
 	#get_tile_mod(2, 1.0, 0.2, true)
 	
-	if dash_node.is_stopped() && wall_jump_node.is_stopped():
+	if dash_node.is_stopped():
 		var adjust_rate = acceleration * tile_acceleration_modifier
 		if direction != clamp(velocity.x,-1,1):
 			adjust_rate = decceleration * tile_acceleration_modifier
@@ -269,8 +236,6 @@ func update_player_state():
 			player_state = PlayerStates.Walk
 		elif direction == 0:
 			player_state = PlayerStates.Idle
-		wall_jump_ready = false
-		wall_jump_coyote_node.stop()
 	else:
 		if velocity.y < 0:
 			player_state = PlayerStates.Jumping
@@ -294,12 +259,7 @@ func update_player_physics(delta):
 		character_velocity.y += gravity * gravity_modifier * delta
 	
 	if character_velocity.y > 0:
-		if is_on_wall():
-			character_velocity.y = clamp(character_velocity.y,0,max_wall_slide_velocity)
-			if wall_jump_coyote_node.is_stopped():
-				wall_jump_coyote_node.start()
-		else:
-			character_velocity.y = clamp(character_velocity.y,0,max_fall_velocity)
+		character_velocity.y = clamp(character_velocity.y,0,max_fall_velocity)
 	
 	velocity.y = character_velocity.y
 	velocity.x = character_velocity.x
