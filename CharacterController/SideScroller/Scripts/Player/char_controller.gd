@@ -29,17 +29,6 @@ extends CharacterBody2D
 @export var wall_jump_x_speed = 700
 @export var wall_jump_reverse_coyote_time = 0.1
 
-@export_group("Stamina")
-@export var jump_stamina_cost = 5
-@export var max_stamina = 100
-@export var stamina_regen_rate_idle = 5
-@export var stamina_regen_rate_walk = 2
-@export var low_stamina_penalty = 0.4
-@export var zero_stamina_time_penalty = 2
-@export var stamina_zero_penalty_time = 0.5
-@export var dash_stamina_cost = 5
-@export var stamina_add = -20
-
 # Internal Variables
 ## Presets
 var is_left = false
@@ -54,7 +43,6 @@ var dash_node : Timer
 var controller_node : Node
 var wall_jump_node : Timer
 var wall_jump_coyote_node : Timer
-var stamina_penalty_node : Timer
 var dust_burst : GPUParticles2D
 
 var wall_jump_ready = false
@@ -80,7 +68,6 @@ var direction = 0
 var character_velocity : Vector2
 var was_on_floor : bool
 var cur_jump_count = 0
-var cur_stamina = 0
 var player_alive = true
 
 func _ready():
@@ -104,10 +91,6 @@ func _ready():
 	new_wall_jump_coyote_timer.connect("timeout", wall_jump_coyote_trigger)
 	new_wall_jump_coyote_timer.name = "wall_jump_coyote_time"
 	add_child(new_wall_jump_coyote_timer)
-
-	var stamina_zero_penalty_timer := Timer.new()
-	stamina_zero_penalty_timer.name = "stamina_zero_penalty_timer"
-	add_child(stamina_zero_penalty_timer)
 	
 	animation_node = get_node("animations")#get_node("animations")
 	jump_allowance_node = get_node("jump_allowance")
@@ -116,7 +99,6 @@ func _ready():
 	controller_node = get_node("controller_container")
 	wall_jump_node = get_node("wall_jump_time")
 	wall_jump_coyote_node = get_node("wall_jump_coyote_time")
-	stamina_penalty_node = get_node("stamina_zero_penalty_timer")
 	#dust_burst = get_node("DustTrail/DustBurst")
 	
 	set_timers()
@@ -125,7 +107,6 @@ func _ready():
 	sync_input_dicts()
 	floor_max_angle = char_slope_angle
 	floor_snap_length = char_snap_length
-	cur_stamina = max_stamina
 	set_controller(human_controller.new(self))
 
 func set_timers():
@@ -139,8 +120,6 @@ func set_timers():
 	wall_jump_node.one_shot = true
 	wall_jump_coyote_node.wait_time = wall_jump_reverse_coyote_time
 	wall_jump_coyote_node.one_shot = true
-	stamina_penalty_node.wait_time = stamina_zero_penalty_time
-	stamina_penalty_node.one_shot = true
 
 func set_controller(input_controller: player_controller) -> void:
 	#Remove Previous Controllers
@@ -183,22 +162,12 @@ func is_just_released(input_check: String) -> bool:
 			return true
 	return false
 
-func stamina_penalty(stamina_payment : int) -> void:
-	cur_stamina = clamp(cur_stamina-stamina_payment,0,max_stamina)
-	if cur_stamina <= 1:
-		if stamina_penalty_node.is_stopped():
-			stamina_penalty_node.start()
-
 func character_jump(increase_jump_count : int, early_release : bool = false) -> float:
 	var calc_jump_force = jump_force
 	if early_release:
 		calc_jump_force *= jump_early_release
 	else:
-		#LevelDirector.PlaySound(LevelDirector.JUMP)
-		if cur_stamina < jump_stamina_cost:
-			calc_jump_force = calc_jump_force * low_stamina_penalty
-		stamina_penalty(jump_stamina_cost)
-		#cur_stamina = clamp(cur_stamina-jump_stamina_cost,0,max_stamina)
+		pass
 	
 	cur_jump_count += increase_jump_count
 	return calc_jump_force
@@ -224,8 +193,6 @@ func get_character_input():
 		elif is_on_wall() && not is_on_floor() && wall_jump_ready:
 			character_velocity.y = character_jump(0)
 			var wall_jump_velocity = wall_jump_x_speed
-			if cur_stamina <= jump_stamina_cost:
-				wall_jump_velocity = wall_jump_x_speed * low_stamina_penalty
 			if not is_left:
 				wall_jump_velocity = wall_jump_velocity * -1
 			character_velocity.x = wall_jump_velocity
@@ -272,12 +239,9 @@ func get_character_input():
 	if is_just_pressed("dash"):
 		character_velocity.y = 0
 		var dash_velocity = dash_speed
-		if cur_stamina <= dash_stamina_cost:
-			dash_velocity = dash_velocity * low_stamina_penalty
 		if is_left:
 			dash_velocity = dash_velocity * -1
 		character_velocity.x = dash_velocity
-		stamina_penalty(dash_stamina_cost)
 		dash_node.start()
 		dust_burst.rotation = (direction * -1)
 		dust_burst.restart()
@@ -346,11 +310,7 @@ func _test_only_code() -> void:
 		set_controller(human_controller.new(self))
 
 func player_final(delta : float) -> void:
-	if stamina_penalty_node.is_stopped():
-		if player_state == PlayerStates.Idle:
-			cur_stamina = clamp(cur_stamina+stamina_regen_rate_idle*delta,0,max_stamina)
-		elif player_state == PlayerStates.Walk:
-			cur_stamina = clamp(cur_stamina+stamina_regen_rate_walk*delta,0,max_stamina)
+	pass
 	
 func _physics_process(delta):
 	get_character_input()
@@ -371,8 +331,3 @@ func _physics_process(delta):
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("collectable"):
 		body.Collect()
-		#LevelDirector.PlaySound(LevelDirector.COLLECTIBLE)
-	if body.is_in_group("stamina_collectable"):
-		body.Collect()
-		#LevelDirector.PlaySound(LevelDirector.COLLECTIBLE)
-		stamina_penalty(stamina_add)
