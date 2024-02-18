@@ -1,5 +1,6 @@
-[gd_scene load_steps=35 format=3 uid="uid://dkhnd58ia1m5t"]
+[gd_scene load_steps=38 format=3 uid="uid://dkhnd58ia1m5t"]
 
+[ext_resource type="Script" path="res://CharacterController/SideScroller/Scenes/side_scroller_test_scene.gd" id="1_w1jq7"]
 [ext_resource type="Texture2D" uid="uid://belg1mxheka3q" path="res://CharacterController/SideScroller/GFX/2 Background/Day/1.png" id="1_xwcmc"]
 [ext_resource type="PackedScene" uid="uid://r44oitiuh0sh" path="res://CharacterController/SideScroller/Scenes/WeatherSystem.tscn" id="2_csoic"]
 [ext_resource type="Texture2D" uid="uid://cbfip1qeil370" path="res://CharacterController/SideScroller/GFX/2 Background/Day/2.png" id="2_m0nrl"]
@@ -14,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dkc6emhyk4hld" path="res://CharacterController/SideScroller/Scenes/collectable_blue_coin.tscn" id="12_7ajfu"]
 [ext_resource type="Script" path="res://CharacterController/SideScroller/Scenes/CameraTracker.gd" id="14_dltny"]
 [ext_resource type="Texture2D" uid="uid://cqk2muuvxavd8" path="res://CharacterController/SideScroller/GFX/3 Objects/4 Collectables/gold coin.png" id="14_tltpd"]
+[ext_resource type="Script" path="res://CharacterController/SideScroller/Scenes/Area2DExit.gd" id="15_ksa1j"]
 
 [sub_resource type="Theme" id="Theme_mrgs0"]
 BoxContainer/constants/separation = 0
@@ -1045,7 +1047,11 @@ _data = {
 }
 point_count = 8
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s6otd"]
+size = Vector2(27.6135, 29.1064)
+
 [node name="SideScrollerTestScene" type="Node2D"]
+script = ExtResource("1_w1jq7")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -1439,6 +1445,13 @@ position = Vector2(119, -175)
 
 [node name="Blue_Coin" parent="." instance=ExtResource("12_7ajfu")]
 position = Vector2(159, -174)
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("15_ksa1j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-494.807, 231.447)
+shape = SubResource("RectangleShape2D_s6otd")
 
 [connection signal="value_changed" from="UI/Panel/Adjusters/JumpForceContainer/JumpForce" to="UI" method="UpdateCharacterRate" binds= ["JumpForce"]]
 [connection signal="value_changed" from="UI/Panel/Adjusters/SpeedContainer/value" to="UI" method="UpdateCharacterRate" binds= ["Speed"]]

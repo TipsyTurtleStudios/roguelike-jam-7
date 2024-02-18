@@ -19,11 +19,7 @@ config/icon="res://icon.svg"
 
 LevelDirector="*res://CharacterController/SideScroller/Scripts/Globals/level_director.gd"
 SceneManager="*res://CharacterController/SideScroller/Scripts/Globals/scene_manager.gd"
-
-[display]
-
-window/size/mode=2
-window/stretch/scale=1.27
+Transition="*res://CharacterController/SideScroller/Scripts/Globals/transition.gd"
 
 [dotnet]
 
