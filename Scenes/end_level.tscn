@@ -1,0 +1,176 @@
+[gd_scene load_steps=9 format=3 uid="uid://om605226ul1"]
+
+[ext_resource type="Script" path="res://CharacterController/SideScroller/Scripts/Testing/TestScene_UI.gd" id="2_2onf3"]
+[ext_resource type="Texture2D" uid="uid://bisxqedal0bj2" path="res://GFX/GameOverScreen.png" id="2_raegv"]
+[ext_resource type="Script" path="res://CharacterController/SideScroller/Scripts/UI/lblResult.gd" id="3_vtmoe"]
+[ext_resource type="Texture2D" uid="uid://dbncb0mr1wwn" path="res://CharacterController/SideScroller/GFX/3 Objects/2 Decoration/small_blue_coin.png" id="6_i73u6"]
+[ext_resource type="Texture2D" uid="uid://b3do4cihxhymq" path="res://CharacterController/SideScroller/GFX/3 Objects/2 Decoration/small_gold_coin.png" id="7_aggws"]
+[ext_resource type="Texture2D" uid="uid://bp00xfecsafyi" path="res://CharacterController/SideScroller/GFX/3 Objects/2 Decoration/small_clock.png" id="7_j826h"]
+
+[sub_resource type="Theme" id="Theme_jonmg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_so06j"]
+font_size = 37
+
+[node name="TestScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_vtmoe")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 112.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_raegv")
+expand_mode = 2
+
+[node name="btnReturn" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 420.0
+offset_top = 131.0
+offset_right = 551.0
+offset_bottom = 162.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Return to Title"
+script = ExtResource("2_2onf3")
+
+[node name="btnReturn2" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 237.0
+offset_top = -22.0
+offset_right = 368.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Try Again"
+script = ExtResource("2_2onf3")
+
+[node name="btnHighScores" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 63.0
+offset_top = 198.0
+offset_right = 194.0
+offset_bottom = 229.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "High Scores"
+script = ExtResource("2_2onf3")
+
+[node name="lblResult" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 108.0
+offset_top = 41.95
+offset_right = -935.0
+offset_bottom = 67.95
+grow_horizontal = 2
+scale = Vector2(2, 2)
+text = "0.0"
+horizontal_alignment = 1
+
+[node name="lblResult2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -933.0
+offset_top = 151.0
+offset_right = -933.0
+offset_bottom = 177.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+text = "69"
+horizontal_alignment = 1
+
+[node name="lblResult3" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -934.0
+offset_top = 248.0
+offset_right = -934.0
+offset_bottom = 274.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+text = "69"
+horizontal_alignment = 1
+
+[node name="lblResult4" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -934.0
+offset_top = 343.0
+offset_right = -934.0
+offset_bottom = 369.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+text = "69"
+horizontal_alignment = 1
+
+[node name="Dead" type="Sprite2D" parent="."]
+position = Vector2(892, 480)
+scale = Vector2(10, 10)
+region_enabled = true
+region_rect = Rect2(0, -1, 15, 17)
+
+[node name="SmallClock" type="Sprite2D" parent="."]
+position = Vector2(65, 66)
+texture = ExtResource("7_j826h")
+
+[node name="SmallBlueCoin" type="Sprite2D" parent="."]
+position = Vector2(67, 278)
+texture = ExtResource("6_i73u6")
+
+[node name="SmallGoldCoin" type="Sprite2D" parent="."]
+position = Vector2(67, 175)
+texture = ExtResource("7_aggws")
+
+[node name="HighScores" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_left = 24.5405
+offset_top = 454.977
+offset_right = 24.5405
+offset_bottom = 454.977
+theme = SubResource("Theme_jonmg")
+
+[node name="ScoreItemContainer" type="VBoxContainer" parent="HighScores"]
+layout_mode = 2
+
+[node name="lblLeaderBoard" type="Label" parent="."]
+layout_mode = 0
+offset_left = 24.5405
+offset_top = 388.509
+offset_right = 242.541
+offset_bottom = 442.509
+text = "High Scores:"
+label_settings = SubResource("LabelSettings_so06j")
+
+[connection signal="pressed" from="btnReturn" to="btnReturn" method="_on_pressed"]
+[connection signal="pressed" from="btnReturn2" to="btnReturn2" method="_on_pressed_retry"]
+[connection signal="pressed" from="btnHighScores" to="btnHighScores" method="_on_pressed_hs"]
