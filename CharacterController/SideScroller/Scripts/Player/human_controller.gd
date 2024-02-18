@@ -2,7 +2,7 @@ class_name human_controller
 extends player_controller
 
 var key_inputs = {
-	"ui_accept": "jump",
+	"ui_up": "jump",
 	"dash": "dash",
 	"ui_left": "left",
 	"ui_right": "right",
