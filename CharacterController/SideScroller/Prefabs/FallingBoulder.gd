@@ -61,7 +61,7 @@ func HitSomething() -> void:
 	TmrBounce.start()
 	DParticle.emitting = true
 	bool_hit_floor = true
-	LevelDirector.PlaySound(LevelDirector.HIT)
+	#LevelDirector.PlaySound(LevelDirector.HIT)
 	LevelDirector.CameraDirector.shake_screen()
 	
 
