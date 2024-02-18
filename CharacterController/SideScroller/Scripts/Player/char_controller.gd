@@ -243,9 +243,9 @@ func get_character_input():
 			dash_velocity = dash_velocity * -1
 		character_velocity.x = dash_velocity
 		dash_node.start()
-		dust_burst.rotation = (direction * -1)
-		dust_burst.restart()
-		dust_burst.emitting = true
+		#dust_burst.rotation = (direction * -1)
+		#dust_burst.restart()
+		#dust_burst.emitting = true
 
 func get_tile_mod(tile_id : int, default : Variant, mod_value : Variant, TileBelow : bool = false) -> Variant:
 	var TileBelowPos : Vector2 = Vector2(position.x, position.y)
