@@ -113,7 +113,7 @@ offset_left = 9.0
 offset_top = 6.0
 offset_right = 709.0
 offset_bottom = 186.0
-text = "Farm boy wanting to be a knight and the quest is to \"find something of beauty\"
+text = "You play as a young farm boy with dreams of becoming a knight. One day, the village is visited by a mysterious traveler who tells tales of a legendary artifact, said to be the most beautiful object in the realm. Determined to prove yourself, you embark on a quest into the unknown.....
 
 Jump (space), double jump, dash (shift) and bounce off walls all while ensuring you have enough stamina to keep going!"
 label_settings = SubResource("LabelSettings_d5oob")
