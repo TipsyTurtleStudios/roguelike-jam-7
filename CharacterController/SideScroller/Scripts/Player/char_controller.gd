@@ -30,7 +30,8 @@ const char_snap_length = 32.0
 const char_slope_angle = deg_to_rad(46)
 
 ## Internal Nodes
-var animation_node : AnimatedSprite2D
+var animation_node : AnimationPlayer
+var farm_boy_node : Node2D
 var jump_allowance_node : Timer
 var coyote_node : Timer
 var dash_node : Timer
@@ -76,7 +77,8 @@ func _ready():
 	add_child(new_dash_timer)
 	
 	
-	animation_node = get_node("animations")#get_node("animations")
+	animation_node = get_node("AnimationPlayer")#get_node("animations")
+	farm_boy_node = get_node("FarmBoy")
 	jump_allowance_node = get_node("jump_allowance")
 	coyote_node = get_node("coyote_allowance")
 	dash_node = get_node("dash_time")
@@ -109,9 +111,11 @@ func set_controller(input_controller: player_controller) -> void:
 
 func update_animation():
 	if is_left:
-		animation_node.flip_h = true
+		farm_boy_node.set_scale(Vector2(1,1))
+		#animation_node.flip_h = true
 	else:
-		animation_node.flip_h = false
+		farm_boy_node.set_scale(Vector2(-1,1))
+		#animation_node.flip_h = false
 	
 	if player_state == PlayerStates.Walk:
 		animation_node.play("Walk")
@@ -119,6 +123,12 @@ func update_animation():
 		
 	if player_state == PlayerStates.Idle:
 		animation_node.play("Idle")
+		
+	if player_state == PlayerStates.Jumping:
+		animation_node.play("Jump")
+		
+	if player_state == PlayerStates.Falling:
+		animation_node.play("Falling")
 	
 
 func sync_input_dicts() -> void:
