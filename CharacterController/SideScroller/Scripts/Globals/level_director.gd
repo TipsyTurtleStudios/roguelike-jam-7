@@ -5,6 +5,7 @@ var player_name : String = "Unknown Player"
 var player_score : float = 0.0
 var blue_coins : int = 0
 var yellow_coins : int = 0
+var stamina_potion : int = 0
 
 var _olddebugmessage : String = ""
 var _debugmessage : String = ""
@@ -72,6 +73,7 @@ func ResetLevel():
 	change_level = false
 	yellow_coins = 0
 	blue_coins = 0
+	stamina_potion = 0
 
 func _process(delta):
 	if start_end_level:

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bp2ikso0eyltu"]
+
+[ext_resource type="Script" path="res://CharacterController/SideScroller/Scenes/stamina_potion.gd" id="1_7bjbb"]
+[ext_resource type="Texture2D" uid="uid://bsvxqfsgg6c26" path="res://CharacterController/SideScroller/GFX/3 Objects/4 Collectables/small stamina.png" id="2_fvr7t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xt1b3"]
+radius = 32.0975
+
+[node name="Stamina_Potion" type="StaticBody2D" groups=["collectable"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_7bjbb")
+
+[node name="SmallStamina" type="Sprite2D" parent="."]
+position = Vector2(1, -7)
+texture = ExtResource("2_fvr7t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -1)
+scale = Vector2(1, 1.2)
+shape = SubResource("CircleShape2D_xt1b3")

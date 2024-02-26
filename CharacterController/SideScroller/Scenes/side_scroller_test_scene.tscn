@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dkhnd58ia1m5t"]
+[gd_scene load_steps=34 format=3 uid="uid://dkhnd58ia1m5t"]
 
 [ext_resource type="Script" path="res://CharacterController/SideScroller/Scenes/side_scroller_test_scene.gd" id="1_w1jq7"]
 [ext_resource type="Texture2D" uid="uid://belg1mxheka3q" path="res://CharacterController/SideScroller/GFX/2 Background/Day/1.png" id="1_xwcmc"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://CharacterController/SideScroller/Scripts/UI/UI.gd" id="10_h7w1m"]
 [ext_resource type="PackedScene" uid="uid://d3s2ajibehkfx" path="res://CharacterController/SideScroller/Scenes/collectable_gold_coin.tscn" id="11_ihwc2"]
 [ext_resource type="PackedScene" uid="uid://dkc6emhyk4hld" path="res://CharacterController/SideScroller/Scenes/collectable_blue_coin.tscn" id="12_7ajfu"]
+[ext_resource type="PackedScene" uid="uid://bp2ikso0eyltu" path="res://CharacterController/SideScroller/Scenes/stamina_potion.tscn" id="14_m6btx"]
 [ext_resource type="Script" path="res://CharacterController/SideScroller/Scenes/Area2DExit.gd" id="15_ksa1j"]
 
 [sub_resource type="Theme" id="Theme_mrgs0"]
@@ -1410,6 +1411,9 @@ script = ExtResource("15_ksa1j")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-494.807, 231.447)
 shape = SubResource("RectangleShape2D_s6otd")
+
+[node name="Stamina_Potion" parent="." instance=ExtResource("14_m6btx")]
+position = Vector2(-124, -127)
 
 [connection signal="value_changed" from="UI/Panel/Adjusters/JumpForceContainer/JumpForce" to="UI" method="UpdateCharacterRate" binds= ["JumpForce"]]
 [connection signal="value_changed" from="UI/Panel/Adjusters/SpeedContainer/value" to="UI" method="UpdateCharacterRate" binds= ["Speed"]]
